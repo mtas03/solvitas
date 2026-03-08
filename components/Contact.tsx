@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Instagram, ArrowRight } from "lucide-react";
+import React from "react";
 
 const socialLinks = [
   { icon: Mail, label: "hello@solvitas.ai", href: "mailto:hello@solvitas.ai" },
@@ -14,16 +15,26 @@ const socialLinks = [
 ];
 
 export function Contact() {
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const brief = (form.elements.namedItem("brief") as HTMLTextAreaElement).value;
+  const [status, setStatus] = React.useState<"idle" | "sending" | "success" | "error">("idle");
 
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(brief);
-    window.location.href = `mailto:hello@solvitas.ai?subject=${subject}&body=${body}`;
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    const res = await fetch("https://formspree.io/f/xpqywydk", {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+
+    if (res.ok) {
+      setStatus("success");
+      form.reset();
+    } else {
+      setStatus("error");
+    }
   }
 
   return (
@@ -125,19 +136,24 @@ export function Contact() {
 
               <Button
                 type="submit"
+                disabled={status === "sending" || status === "success"}
                 size="lg"
-                className="w-full bg-orange hover:bg-orange-dark text-white rounded-full h-12 font-semibold text-base group transition-colors duration-200 shadow-lg shadow-orange/20"
+                className="w-full bg-orange hover:bg-orange-dark text-white rounded-full h-12 font-semibold text-base group transition-colors duration-200 shadow-lg shadow-orange/20 disabled:opacity-60"
               >
-                Send Message
-                <ArrowRight
-                  size={16}
-                  className="ml-2 group-hover:translate-x-1 transition-transform duration-200"
-                />
+                {status === "sending" ? "Sending..." : status === "success" ? "Message Sent!" : "Send Message"}
+                {status === "idle" && (
+                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-200" />
+                )}
               </Button>
 
-              <p className="text-center text-xs text-zinc-600">
-                We respond within 24 hours. No spam, ever.
-              </p>
+              {status === "error" && (
+                <p className="text-center text-xs text-red-400">Something went wrong. Please try again.</p>
+              )}
+              {status !== "error" && (
+                <p className="text-center text-xs text-zinc-600">
+                  {status === "success" ? "We'll get back to you within 24 hours." : "We respond within 24 hours. No spam, ever."}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>
