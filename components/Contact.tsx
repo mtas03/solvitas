@@ -32,6 +32,7 @@ export function Contact() {
     if (res.ok) {
       setStatus("success");
       form.reset();
+      setTimeout(() => setStatus("idle"), 3000);
     } else {
       setStatus("error");
     }
