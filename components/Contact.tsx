@@ -22,7 +22,7 @@ export function Contact() {
     const brief = (form.elements.namedItem("brief") as HTMLTextAreaElement).value;
 
     const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject Brief:\n${brief}`);
+    const body = encodeURIComponent(brief);
     window.location.href = `mailto:hello@solvitas.ai?subject=${subject}&body=${body}`;
   }
 
