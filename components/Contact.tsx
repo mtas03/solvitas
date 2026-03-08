@@ -14,6 +14,18 @@ const socialLinks = [
 ];
 
 export function Contact() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const brief = (form.elements.namedItem("brief") as HTMLTextAreaElement).value;
+
+    const subject = encodeURIComponent(`Project inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject Brief:\n${brief}`);
+    window.location.href = `mailto:hello@solvitas.ai?subject=${subject}&body=${body}`;
+  }
+
   return (
     <section id="contact" className="py-28 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -69,9 +81,7 @@ export function Contact() {
             transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
             <form
-              action="mailto:hello@solvitas.ai"
-              method="post"
-              encType="text/plain"
+              onSubmit={handleSubmit}
               className="bg-white/[0.04] rounded-2xl p-8 border border-white/8 flex flex-col gap-6"
             >
               <div className="grid sm:grid-cols-2 gap-5">
