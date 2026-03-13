@@ -8,14 +8,29 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Solvitas.AI — We don't promise, we deliver.",
+  title: "Solvitas.AI | You describe the vision. We deploy the reality.",
   description:
-    "A young, trend-obsessed Dutch AI consultancy. We build bespoke digital products at speed — from simple websites to complex full-stack apps with live data integration.",
+    "Solvitas.AI is an elite team of AI experts vibe-coding bespoke micro-apps and full-stack solutions at high speed. No templates. No corporate lag. Just clean, production-grade code.",
+  keywords: [
+    "AI consultancy",
+    "vibe coding",
+    "custom micro-apps",
+    "Claude Code development",
+    "bespoke software",
+  ],
+  themeColor: "#000000",
   openGraph: {
-    title: "Solvitas.AI",
-    description: "We don't promise, we deliver.",
+    title: "Solvitas.AI | You describe the vision. We deploy the reality.",
+    description:
+      "Solvitas.AI is an elite team of AI experts vibe-coding bespoke micro-apps and full-stack solutions at high speed. No templates. No corporate lag. Just clean, production-grade code.",
     locale: "en_NL",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Solvitas.AI | You describe the vision. We deploy the reality.",
+    description:
+      "Solvitas.AI is an elite team of AI experts vibe-coding bespoke micro-apps and full-stack solutions at high speed. No templates. No corporate lag. Just clean, production-grade code.",
   },
 };
 
