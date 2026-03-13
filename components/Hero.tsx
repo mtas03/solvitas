@@ -130,13 +130,6 @@ export function Hero() {
                 </motion.span>
               ))}
             </span>
-            {/* Tagline */}
-            <motion.span
-              variants={wordVariant}
-              className='block text-[0.38em] font-semibold text-zinc-400 tracking-widest uppercase mt-5'
-            >
-              No &ldquo;tech-speak&rdquo; required.
-            </motion.span>
           </motion.h1>
 
           {/* Subline */}
@@ -146,9 +139,7 @@ export function Hero() {
             transition={{ duration: 0.65, delay: 1.3 }}
             className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed"
           >
-            Rapid bespoke development — from simple websites to complex
-            full-stack apps with live data integration. No templates. No
-            shortcuts. Just clean, production-grade code.
+            Think of us as your high-speed alternative to &ldquo;standard&rdquo; agencies. Armed with the latest AI, we turn your &ldquo;what-ifs&rdquo; into data-synced apps in record time. No bloat, no &ldquo;consultant-speak,&rdquo; and absolutely no templates. Just clean, custom code that&apos;s ready to ship.
           </motion.p>
 
           {/* CTAs */}
