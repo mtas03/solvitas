@@ -5,18 +5,21 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
-const headline = [
-  { text: "We don't", highlight: false },
-  { text: "promise,", highlight: false },
-  { text: "we", highlight: false },
-  { text: "deliver.", highlight: true },
+const line1 = [
+  { text: "You describe", highlight: false },
+  { text: "the vision.", highlight: false },
+];
+
+const line2 = [
+  { text: "We deploy", highlight: false },
+  { text: "the reality.", highlight: true },
 ];
 
 const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.14,
+      staggerChildren: 0.18,
       delayChildren: 0.35,
     },
   },
@@ -96,27 +99,51 @@ export function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="text-[clamp(3rem,7.5vw,5.75rem)] font-bold leading-[1.04] tracking-tighter text-zinc-900 mb-8"
+            className="text-[clamp(2.6rem,6.5vw,5.25rem)] font-bold leading-[1.08] tracking-tighter text-zinc-900 mb-8"
             style={{ perspective: "800px" }}
           >
-            {headline.map((part, i) => (
-              <motion.span
-                key={i}
-                variants={wordVariant}
-                className={`inline-block mr-[0.2em] ${
-                  part.highlight ? "text-orange" : ""
-                }`}
-              >
-                {part.text}
-              </motion.span>
-            ))}
+            {/* Line 1 */}
+            <span className="block">
+              {line1.map((part, i) => (
+                <motion.span
+                  key={i}
+                  variants={wordVariant}
+                  className={`inline-block mr-[0.22em] ${
+                    part.highlight ? "text-orange" : ""
+                  }`}
+                >
+                  {part.text}
+                </motion.span>
+              ))}
+            </span>
+            {/* Line 2 */}
+            <span className="block">
+              {line2.map((part, i) => (
+                <motion.span
+                  key={i + 2}
+                  variants={wordVariant}
+                  className={`inline-block mr-[0.22em] ${
+                    part.highlight ? "text-orange" : ""
+                  }`}
+                >
+                  {part.text}
+                </motion.span>
+              ))}
+            </span>
+            {/* Tagline */}
+            <motion.span
+              variants={wordVariant}
+              className='block text-[0.38em] font-semibold text-zinc-400 tracking-widest uppercase mt-5'
+            >
+              No &ldquo;tech-speak&rdquo; required.
+            </motion.span>
           </motion.h1>
 
           {/* Subline */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 1.05 }}
+            transition={{ duration: 0.65, delay: 1.3 }}
             className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed"
           >
             Rapid bespoke development — from simple websites to complex
@@ -128,7 +155,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 1.25 }}
+            transition={{ duration: 0.65, delay: 1.5 }}
             className="flex flex-wrap gap-4"
           >
             <Button
